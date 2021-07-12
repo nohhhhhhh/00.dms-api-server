@@ -1,0 +1,23 @@
+server:
+  port: 8081
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://172.27.44.76:1433;databaseName=mhFactory_db
+    username: sa
+    password: NS2$0lution
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        format_sql: true
+        show_sql: true
