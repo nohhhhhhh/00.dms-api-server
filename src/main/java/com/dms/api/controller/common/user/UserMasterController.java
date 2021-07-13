@@ -1,9 +1,9 @@
 package com.dms.api.controller.common.user;
 
+import com.dms.api.dto.common.user.UserMasterDto;
 import com.dms.api.entitiy.common.user.UserMaster;
 import com.dms.api.service.common.user.UserMasterService;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +21,12 @@ public class UserMasterController {
   private UserMasterService userMasterService;
 
   @GetMapping
-  public Optional<List<UserMaster>> getUserMasters(@RequestParam("param") String param,
-      UserMaster userMaster) {
-    System.out.println(param);
-    return userMasterService.getUserMasters(userMaster);
+  public List<UserMaster> getUserMasters(@RequestParam("param") String param) {
+
+    UserMasterDto userMasterDto = new UserMasterDto();
+    userMasterDto.setUseYn(param);
+    return userMasterService.getUserMasters(userMasterDto);
+
   }
 
 }

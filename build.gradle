@@ -10,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 ext {
-    queryDslVersion = '4.2.1'
+    queryDslVersion = '4.4.0'
 }
 
 configurations {
