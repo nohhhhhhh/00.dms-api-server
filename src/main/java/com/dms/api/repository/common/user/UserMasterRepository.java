@@ -1,6 +1,6 @@
-package com.dms.api.repositories.common.user;
+package com.dms.api.repository.common.user;
 
-import com.dms.api.domains.common.user.UserMaster;
+import com.dms.api.entitiy.common.user.UserMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
