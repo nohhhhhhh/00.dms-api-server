@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class DmsBaseDto {
 
+  private String idOrName;
   private String plantId;
   private String description;
   private String useYn;
