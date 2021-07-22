@@ -1,6 +1,9 @@
 server:
   port: 8081
 spring:
+  devtools:
+    restart:
+      log-condition-evaluation-delta: false
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://172.27.44.76:1433;databaseName=mhFactory_db
@@ -17,3 +20,12 @@ spring:
         dialect: org.hibernate.dialect.SQLServerDialect
         format_sql: true
         show_sql: true
+        generate_statistics: true
+logging:
+  file:
+    path: 'd:/nse/log/dms.%d{yyyy-MM-dd}.%i'
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type: trace

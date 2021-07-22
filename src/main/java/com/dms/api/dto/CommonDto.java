@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DmsBaseDto {
+public class CommonDto {
 
   private String idOrName;
   private String plantId;

@@ -6,6 +6,13 @@ import javax.persistence.PersistenceContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * UserMaster CRUD Guide Page.
+ *
+ * @author  NOH
+ * @since   1.0
+ *
+ */
 @Configuration
 public class QuerydslConfig {
 

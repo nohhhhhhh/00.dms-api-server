@@ -1,5 +1,6 @@
-package com.dms.api.entitiy.common.user;
+package com.dms.api.entitiy.setting;
 
+import com.sun.istack.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,21 +11,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "CM_USER_M")
+@Table(name = "CM_USER_ACCESS_R")
 @Entity
-public class UserMaster {
+public class UserAcessRelation {
 
   @Id
+  @NotNull
   private String userId;
 
-  private String userNm;
-  private String userState;
-  private String userPwd;
-  private String changePwdDt;
-  private String email;
-  private String telephone;
-  private String mobile;
-  private String mainMenuId;
+  @NotNull
+  private String accessId;
+  private String plantId;
+
   private String description;
   private String useYn;
   private String createDt;

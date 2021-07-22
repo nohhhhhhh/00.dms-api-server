@@ -1,13 +1,15 @@
-package com.dms.api.dto.common.user;
+package com.dms.api.dto.setting;
 
-import com.dms.api.dto.DmsBaseDto;
+import com.dms.api.dto.CommonDto;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class UserBaseDto extends DmsBaseDto {
+public class UserMasterDto extends CommonDto {
 
+  @NonNull
   private String userId;
   private String userNm;
   private String userState;
