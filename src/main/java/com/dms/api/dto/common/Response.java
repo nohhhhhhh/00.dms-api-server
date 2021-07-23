@@ -1,7 +1,7 @@
-package com.dms.api.dto;
+package com.dms.api.dto.common;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,11 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ResponseDto {
+public class Response {
 
   private int status;
   private LocalDateTime timestamp;
   private String message;
-  private List<?> resultList;
+  private Map<String, Object> data;
 
 }

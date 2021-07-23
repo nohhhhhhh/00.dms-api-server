@@ -1,4 +1,4 @@
-package com.dms.api.dto;
+package com.dms.api.dto.common;
 
 import lombok.Getter;
 import lombok.Setter;

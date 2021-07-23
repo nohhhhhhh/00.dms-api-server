@@ -22,8 +22,7 @@ public class UserAcessRelationRepository extends DmsBaseRepository<UserAcessRela
 
   public List<UserAcessRelation> selectListByOption(UserMasterDto userMasterDto) {
     return queryFactory.selectFrom(userAcessRelation)
-        .where(eqUseYn(userMasterDto.getUseYn()), eqUserId(userMasterDto.getUserId()),
-            eqPlantId(userMasterDto.getUserPwd()))
+        .where(eqUseYn(userMasterDto.getUseYn()), eqUserId(userMasterDto.getUserId()))
         .orderBy(userAcessRelation.createDt.desc()).fetch();
   }
 

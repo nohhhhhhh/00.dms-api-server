@@ -1,3 +1,5 @@
+app:
+  name: dms
 server:
   port: 8081
 spring:
@@ -29,3 +31,7 @@ logging:
       hibernate:
         SQL: debug
         type: trace
+jwt:
+  header: Authorization
+  secret: VABoAGkAcwAgAGkAcwAgAEQATQBTACAAUwBlAGMAcgBlAHQAIABLAGUAeQAuACAAZgBvAHIAIABKAHMAbwBuAFcAZQBiAFQAbwBrAGUAbgAgAA==
+  token-validity-seconds: 86400

@@ -1,6 +1,6 @@
 package com.dms.api.controller.setting;
 
-import com.dms.api.dto.ResponseDto;
+import com.dms.api.dto.common.Response;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.api.entitiy.setting.UserMaster;
 import com.dms.api.service.setting.UserMasterService;
@@ -35,13 +35,13 @@ public class UserMasterController {
   }
 
   @GetMapping("/guide")
-  public ResponseEntity<ResponseDto> getUserMasters(@ModelAttribute UserMasterDto userMasterDto,
+  public ResponseEntity<Response> getUserMasters(@ModelAttribute UserMasterDto userMasterDto,
       @RequestParam String param) throws Exception {
     return userMasterService.getUserMasters(userMasterDto);
   }
 
   @PostMapping
-  public ResponseEntity<ResponseDto> saveUserMaster(@ModelAttribute UserMasterDto userMasterDto)
+  public ResponseEntity<Response> saveUserMaster(@ModelAttribute UserMasterDto userMasterDto)
       throws Exception {
     return userMasterService.saveUserMaster(userMasterDto);
   }

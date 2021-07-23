@@ -1,6 +1,6 @@
 package com.dms.api.controller.setting;
 
-import com.dms.api.dto.ResponseDto;
+import com.dms.api.dto.common.Response;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.api.service.setting.LoginService;
 import com.dms.api.service.setting.UserMasterService;
@@ -29,7 +29,7 @@ public class LoginController {
   private LoginService loginService;
 
   @GetMapping
-  public ResponseEntity<ResponseDto> getUserLoginResult(@ModelAttribute UserMasterDto userMasterDto)
+  public ResponseEntity<Response> getUserLoginResult(@ModelAttribute UserMasterDto userMasterDto)
       throws Exception {
     return loginService.getUserLoginResult(userMasterDto);
   }
