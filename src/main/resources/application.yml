@@ -1,7 +1,10 @@
 app:
   name: dms-api-server
-  version: 0.0.1
-  description: NSE DMS API SERVER
+  api:
+    version:  0.0.1
+    description: NSE DMS API SERVER
+    swagger:
+      enable: true
 server:
   port: 8081
 spring:
