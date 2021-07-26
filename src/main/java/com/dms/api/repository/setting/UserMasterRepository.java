@@ -10,6 +10,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -19,6 +20,9 @@ public class UserMasterRepository extends DmsBaseRepository<UserMaster, Long> {
 
   @Autowired
   private JPAQueryFactory queryFactory;
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public List<UserMaster> selectListByOption(UserMasterDto userMasterDto) {
     return queryFactory.selectFrom(userMaster)
