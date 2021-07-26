@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("plant-master")
 public class PlantMasterController {
 
   @Autowired
   private PlantMasterService plantMasterService;
 
   @GetMapping
+  @RequestMapping("/open-api/plant-master")
   public ResponseEntity<Response> getPlantMaster(@ModelAttribute PlantMasterDto plantMasterDto)
       throws Exception {
     return plantMasterService.getPlantMaster(plantMasterDto);

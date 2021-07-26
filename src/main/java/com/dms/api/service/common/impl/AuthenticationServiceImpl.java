@@ -60,7 +60,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         /*UserAccessPlant Check*/
         if (!userAcessRelationRepository.selectListByOption(userMasterDto).isEmpty()) {
           jwt = jwtTokenProvider.createToken(userMasterDto.getUserId());
-          resultData.put("JWT", jwt);
+          resultData.put("userId", matchUser.get(0).getUserId());
+          resultData.put("userNm", matchUser.get(0).getUserNm());
+
         } else {
           throw new Exception("선택하신 구역의 접근권한이 없습니다. 관리자에게 문의해주세요.");
         }
@@ -74,7 +76,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       message = e.getMessage();
     }
 
-    resultData.put("UserToken", jwt);
+    resultData.put("userToken", jwt);
     Response response = new Response(status, LocalDateTime.now(), message, resultData);
     return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
