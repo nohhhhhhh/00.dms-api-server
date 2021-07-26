@@ -1,5 +1,7 @@
 app:
-  name: dms-server
+  name: dms-api-server
+  version: 0.0.1
+  description: NSE DMS API SERVER
 server:
   port: 8081
 spring:
