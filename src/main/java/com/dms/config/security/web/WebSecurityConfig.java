@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   /**
    * Detail Web Configure.
-   *
    * REST API 만을 고려하여 기본 설정은 해제하겠습니다.
    * 토큰 사용으로 CSRF/세션 제외.
    *
