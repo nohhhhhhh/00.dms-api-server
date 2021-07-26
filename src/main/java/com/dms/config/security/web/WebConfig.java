@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-  private final long MAX_AGE_SECS = 3600;
+  private final long MAX_AGE_SEC = 3600;
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
@@ -16,6 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
         .allowedMethods("*")
         .allowedHeaders("*")
         .allowCredentials(false)
-        .maxAge(MAX_AGE_SECS);
+        .maxAge(MAX_AGE_SEC);
   }
 }

@@ -2,6 +2,7 @@ package com.dms.api.service.common.impl;
 
 import com.dms.api.dto.common.Response;
 import com.dms.api.dto.setting.UserMasterDto;
+import com.dms.api.entitiy.setting.UserMaster;
 import com.dms.api.repository.setting.UserAcessRelationRepository;
 import com.dms.api.repository.setting.UserMasterRepository;
 import com.dms.api.service.common.AuthenticationService;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,19 +44,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
       throws Exception {
     String jwt = "";
     HttpHeaders httpHeaders = new HttpHeaders();
+
     resultData = new HashMap<String, Object>();
     try {
       status = 200;
       message = "HttpStatus.OK";
       userMasterDto.setUseYn("Y");
-      if (!userMasterRepository.selectListByOption(userMasterDto).isEmpty()) {
 
+      List<UserMaster> matchUser = userMasterRepository.selectListByOption(userMasterDto)
+          .stream()
+          .filter(user -> passwordEncoder.matches(userMasterDto.getUserPwd(), user.getUserPwd()))
+          .collect(Collectors.toList());
+
+      if (matchUser.size() > 0) {
         /*UserAccessPlant Check*/
         if (!userAcessRelationRepository.selectListByOption(userMasterDto).isEmpty()) {
-
           jwt = jwtTokenProvider.createToken(userMasterDto.getUserId());
           resultData.put("JWT", jwt);
-
         } else {
           throw new Exception("선택하신 구역의 접근권한이 없습니다. 관리자에게 문의해주세요.");
         }

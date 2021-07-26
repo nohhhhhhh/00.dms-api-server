@@ -4,6 +4,7 @@ import com.dms.config.security.jwt.JwtAuthenticationFilter;
 import com.dms.config.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,11 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final JwtTokenProvider jwtTokenProvider;
 
-
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder();
   }
+
 
   @Bean
   @Override
@@ -40,11 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   /**
    * Detail Web Configure.
-   * REST API 만을 고려하여 기본 설정은 해제한다
-   * Token 기반 인증으로 Session 사용은 해제한다
-   * CSRF 보안 토큰 해제.
    *
-   * @author NOH.
+   * REST API 만을 고려하여 기본 설정은 해제하겠습니다.
+   * 토큰 사용으로 CSRF/세션 제외.
+   *
+   * @author NOH
    * @since 1.0
    *
    */
@@ -57,12 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers("/open-api/**").permitAll()
+        .antMatchers(HttpMethod.GET, "/open-api/**").permitAll()
         .antMatchers("/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
             UsernamePasswordAuthenticationFilter.class).cors();
+
   }
 
 }

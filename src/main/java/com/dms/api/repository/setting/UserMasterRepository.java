@@ -10,7 +10,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -21,13 +20,10 @@ public class UserMasterRepository extends DmsBaseRepository<UserMaster, Long> {
   @Autowired
   private JPAQueryFactory queryFactory;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
-
   public List<UserMaster> selectListByOption(UserMasterDto userMasterDto) {
     return queryFactory.selectFrom(userMaster)
         .where(eqUseYn(userMasterDto.getUseYn()), lkIdOrName(userMasterDto.getIdOrName()),
-            eqUserId(userMasterDto.getUserId()), eqUserPwd(userMasterDto.getUserPwd()))
+            eqUserId(userMasterDto.getUserId()))
         .orderBy(userMaster.createDt.desc()).fetch();
   }
 
@@ -39,11 +35,6 @@ public class UserMasterRepository extends DmsBaseRepository<UserMaster, Long> {
   private BooleanExpression eqUserId(String userId) {
     return StringUtils.isEmpty(userId) ? null
         : userMaster.userId.eq(userId);
-  }
-
-  private BooleanExpression eqUserPwd(String userPwd) {
-    return StringUtils.isEmpty(userPwd) ? null
-        : userMaster.userPwd.eq(userPwd);
   }
 
   private BooleanExpression lkIdOrName(String idOrName) {

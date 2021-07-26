@@ -16,7 +16,7 @@ public class AuthenticationController {
   @Autowired
   private AuthenticationService authenticationService;
 
-  @GetMapping(value = "/open-api/publication-token", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/open-api/JsonWebToken", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Response> generateJsonWebToken(
       @ModelAttribute UserMasterDto userMasterDto)
       throws Exception {
