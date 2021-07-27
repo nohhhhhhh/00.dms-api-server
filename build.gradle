@@ -8,6 +8,7 @@ plugins {
 group = 'com.dms'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+targetCompatibility = '11'
 
 ext {
     queryDslVersion = '4.4.0'
@@ -55,6 +56,8 @@ dependencies {
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
     compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
 
+    compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.2'
+
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -73,6 +76,11 @@ sourceSets {
 
 clean.doLast {
     file(generated).deleteDir()
+}
+
+compileJava {
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }
 
 tasks.withType(JavaCompile) {

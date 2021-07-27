@@ -13,9 +13,9 @@ spring:
       log-condition-evaluation-delta: false
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://172.27.44.76:1433;databaseName=mhFactory_db
-    username: sa
-    password: NS2$0lution
+    url: ENC(E/mZMgRdnogTcWh3jnAoysONRGbE/KujMQcqljbgiynW7HecgvZJSlnILM86H2LtKgXssCn3a8WjEDHj/ysliEMvsBWfbMlY)
+    username: ENC(3EXbWYCL/VsplYv7qCveWw==)
+    password: ENC(7wgLzOE9+lXX7gRVX40n9WwN6FMtOSFy)
   h2:
     console:
       enabled: true
@@ -40,3 +40,7 @@ jwt:
   header: Authorization
   secret: VABoAGkAcwAgAGkAcwAgAEQATQBTACAAUwBlAGMAcgBlAHQAIABLAGUAeQAuACAAZgBvAHIAIABKAHMAbwBuAFcAZQBiAFQAbwBrAGUAbgAgAA==
   token-validity-seconds: 86400
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: NseDmsApiServerJasyptKey
