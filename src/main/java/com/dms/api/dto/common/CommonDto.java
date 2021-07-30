@@ -1,6 +1,5 @@
 package com.dms.api.dto.common;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,6 @@ import lombok.Setter;
 public class CommonDto {
 
   private String idOrName;
-  private List<?> children;
 
   private String plantId;
   private String description;
