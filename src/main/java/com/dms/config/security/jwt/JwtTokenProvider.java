@@ -1,5 +1,6 @@
 package com.dms.config.security.jwt;
 
+import com.dms.api.service.common.impl.SecurityUserDetailServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
 
+  @Autowired
+  SecurityUserDetailServiceImpl customUserDetailsService;
+
   @Value("${jwt.secret}")
   private String SECRET_KEY;
 
@@ -29,13 +34,18 @@ public class JwtTokenProvider {
   private String ISSUER;
 
   @Value("${jwt.token-validity-seconds}")
-  private String TOKEN_VALIDITY_SECONDS;
+  private int TOKEN_VALIDITY_SECONDS;
 
   private final UserDetailsService userDetailsService;
 
   public String createToken(String userId) {
     Claims claims = Jwts.claims().setSubject(userId);
+    claims.put("username",userId);
     /*claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.*/
+    Date expireTime = new Date();
+    Long test = 1000 * 60L * 60L * 2L;
+    expireTime.setTime(expireTime.getTime() + test);
+
     Map<String, Object> header = new HashMap<>();
     header.put("alg", "RS256");
     header.put("typ", "JWT");
@@ -45,13 +55,14 @@ public class JwtTokenProvider {
         .setClaims(claims)
         .setIssuedAt(now)
         .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+        .setExpiration(expireTime)
         .setIssuer(ISSUER)
         .setId(UUID.randomUUID().toString())
         .compact();
   }
 
   public Authentication getAuthentication(String token) {
-    UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
+    UserDetails userDetails = customUserDetailsService.loadUserByUsername(this.getUserPk(token));
     return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
   }
 
@@ -64,7 +75,7 @@ public class JwtTokenProvider {
   }
 
   public String resolveToken(HttpServletRequest request) {
-    return request.getHeader("JWT");
+    return request.getHeader("userToken");
   }
 
   public boolean validateToken(String jwtToken) {

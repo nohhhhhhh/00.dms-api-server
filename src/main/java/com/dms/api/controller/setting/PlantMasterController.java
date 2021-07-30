@@ -26,8 +26,7 @@ public class PlantMasterController {
   @ApiOperation(value = "Plant List", notes = "접근 가능한 Plant List 조회")
   @GetMapping("/open-api/plant-master")
   public ResponseEntity<Response> getPlantMaster(@ModelAttribute PlantMasterDto plantMasterDto)
-      throws Exception {
-    return plantMasterService.getPlantMaster(plantMasterDto);
+      throws Exception { return plantMasterService.getPlantMaster(plantMasterDto);
   }
 
 }
