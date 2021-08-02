@@ -75,6 +75,52 @@ public class UserMasterServiceImpl implements UserMasterService {
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }
 
+
+  public ResponseEntity<Response> updateUserMaster(UserMasterDto userMasterDto) throws Exception {
+
+    try {
+      status = 200;
+      message = "HttpStatus.OK";
+      resultData = new HashMap<String, Object>();
+
+      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
+      UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
+      userMasterRepository.save(userMaster);
+
+    } catch (Exception e) {
+      status = 200;
+      message = e.getMessage();
+    }
+
+    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+
+    return new ResponseEntity<Response>(response, HttpStatus.OK);
+  }
+
+
+  public ResponseEntity<Response> deleteUserMaster(UserMasterDto userMasterDto) throws Exception {
+
+    try {
+      status = 200;
+      message = "HttpStatus.OK";
+      resultData = new HashMap<String, Object>();
+
+      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
+      userMasterDto.setUseYn("N");
+      userMasterDto.setUpdateUserId("noh");
+      UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
+      userMasterRepository.save(userMaster);
+
+    } catch (Exception e) {
+      status = 200;
+      message = e.getMessage();
+    }
+
+    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+
+    return new ResponseEntity<Response>(response, HttpStatus.OK);
+  }
+
 }
 
 

@@ -15,7 +15,7 @@ public class CommonDto {
   private String useYn;
   private Date createDt;
   private String createUserId;
-  private String updateDt;
+  private Date updateDt;
   private String updateUserId;
   private String api;
   private String tid;
