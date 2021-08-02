@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +24,9 @@ public class UserMasterServiceImpl implements UserMasterService {
 
   @Autowired
   private ModelMapper modelMapper;
+
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   public int status = 500;
   public String message;
@@ -56,6 +60,8 @@ public class UserMasterServiceImpl implements UserMasterService {
       status = 200;
       message = "HttpStatus.OK";
       resultData = new HashMap<String, Object>();
+
+      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
       UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
       userMasterRepository.save(userMaster);
 

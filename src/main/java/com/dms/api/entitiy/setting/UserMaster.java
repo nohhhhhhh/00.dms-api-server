@@ -1,12 +1,14 @@
 package com.dms.api.entitiy.setting;
 
 import com.sun.istack.NotNull;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -37,7 +39,8 @@ public class UserMaster {
 
   private String useYn;
 
-  private String createDt;
+  @CreationTimestamp
+  private Date createDt;
   private String createUserId;
   private String updateDt;
   private String updateUserId;
