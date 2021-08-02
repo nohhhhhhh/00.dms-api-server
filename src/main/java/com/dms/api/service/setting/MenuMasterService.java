@@ -72,7 +72,7 @@ public class MenuMasterService {
       message = e.getMessage();
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+    Response response = new Response(status, message, resultData);
 
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }
@@ -116,7 +116,7 @@ public class MenuMasterService {
       message = e.getMessage();
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+    Response response = new Response(status, message, resultData);
 
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }

@@ -14,7 +14,7 @@ public interface UserMasterService {
 
   ResponseEntity<Response> saveUserMaster(UserMasterDto userMasterDto) throws Exception;
 
-  ResponseEntity<Response> updateUserMaster(UserMasterDto userMasterDto) throws Exception;
+  ResponseEntity<Response> updateUserMaster(UserMasterDto userMasterDto);
 
   ResponseEntity<Response> deleteUserMaster(UserMasterDto userMasterDto) throws Exception;
 

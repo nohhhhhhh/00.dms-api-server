@@ -19,107 +19,105 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserMasterServiceImpl implements UserMasterService {
 
-  @Autowired
-  private UserMasterRepository userMasterRepository;
+    @Autowired
+    private UserMasterRepository userMasterRepository;
 
-  @Autowired
-  private ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-  public int status = 500;
-  public String message;
-  public Map<String, Object> resultData;
-  public List<?> resultList;
+    public int status = 500;
+    public String message;
+    public Map<String, Object> resultData;
+    public List<?> resultList;
 
-  public List<UserMaster> getUserMaster(UserMasterDto userMasterDto) {
-    return userMasterRepository.selectListByOption(userMasterDto);
-  }
-
-
-  public ResponseEntity<Response> getUserMasters(UserMasterDto userMasterDto) throws Exception {
-
-    try {
-      status = 200;
-      message = "HttpStatus.OK";
-      resultData = new HashMap<String, Object>();
-      resultData.put("dataList", userMasterRepository.selectListByOption(userMasterDto));
-    } catch (Exception e) {
-      message = "HttpStatus.INTERNAL_SERVER_ERROR";
+    public List<UserMaster> getUserMaster(UserMasterDto userMasterDto) {
+        return userMasterRepository.selectListByOption(userMasterDto);
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
 
-    return new ResponseEntity<Response>(response, HttpStatus.OK);
-  }
+    public ResponseEntity<Response> getUserMasters(UserMasterDto userMasterDto) throws Exception {
 
-  public ResponseEntity<Response> saveUserMaster(UserMasterDto userMasterDto) throws Exception {
+        try {
+            status = 200;
+            message = "HttpStatus.OK";
+            resultData = new HashMap<String, Object>();
+            resultData.put("dataList", userMasterRepository.selectListByOption(userMasterDto));
+        } catch (Exception e) {
+            message = "HttpStatus.INTERNAL_SERVER_ERROR";
+        }
 
-    try {
-      status = 200;
-      message = "HttpStatus.OK";
-      resultData = new HashMap<String, Object>();
+        Response response = new Response(status, message, resultData);
 
-      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
-      UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
-      userMasterRepository.save(userMaster);
-
-    } catch (Exception e) {
-      status = 200;
-      message = e.getMessage();
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+    public ResponseEntity<Response> saveUserMaster(UserMasterDto userMasterDto) throws Exception {
 
-    return new ResponseEntity<Response>(response, HttpStatus.OK);
-  }
+        try {
+            status = 200;
+            message = "HttpStatus.OK";
+            resultData = new HashMap<String, Object>();
 
+            userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
+            UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
+            userMasterRepository.save(userMaster);
 
-  public ResponseEntity<Response> updateUserMaster(UserMasterDto userMasterDto) throws Exception {
+        } catch (Exception e) {
+            status = 200;
+            message = e.getMessage();
+        }
 
-    try {
-      status = 200;
-      message = "HttpStatus.OK";
-      resultData = new HashMap<String, Object>();
+        Response response = new Response(status, message, resultData);
 
-      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
-      UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
-      userMasterRepository.save(userMaster);
-
-    } catch (Exception e) {
-      status = 200;
-      message = e.getMessage();
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
 
-    return new ResponseEntity<Response>(response, HttpStatus.OK);
-  }
+    public ResponseEntity<Response> updateUserMaster(UserMasterDto userMasterDto) {
 
+        status = 200;
+        message = "HttpStatus.OK";
+        resultData = new HashMap<String, Object>();
 
-  public ResponseEntity<Response> deleteUserMaster(UserMasterDto userMasterDto) throws Exception {
+        userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
+        UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
 
-    try {
-      status = 200;
-      message = "HttpStatus.OK";
-      resultData = new HashMap<String, Object>();
+        if (userMasterDto.getChangePwdDt() == null) {
+            throw new NullPointerException("비밀번호가 없습니다");
+        }
 
-      userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
-      userMasterDto.setUseYn("N");
-      userMasterDto.setUpdateUserId("noh");
-      UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
-      userMasterRepository.save(userMaster);
+        userMasterRepository.save(userMaster);
+        Response response = new Response(status, message, resultData);
 
-    } catch (Exception e) {
-      status = 200;
-      message = e.getMessage();
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
 
-    return new ResponseEntity<Response>(response, HttpStatus.OK);
-  }
+    public ResponseEntity<Response> deleteUserMaster(UserMasterDto userMasterDto) throws Exception {
+
+        try {
+            status = 200;
+            message = "HttpStatus.OK";
+            resultData = new HashMap<String, Object>();
+
+            userMasterDto.setUserPwd(passwordEncoder.encode(userMasterDto.getUserPwd()));
+            userMasterDto.setUseYn("N");
+            userMasterDto.setUpdateUserId("noh");
+            UserMaster userMaster = modelMapper.map(userMasterDto, UserMaster.class);
+            userMasterRepository.save(userMaster);
+
+        } catch (Exception e) {
+            status = 200;
+            message = e.getMessage();
+        }
+
+        Response response = new Response(status, message, resultData);
+
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
+    }
 
 }
 

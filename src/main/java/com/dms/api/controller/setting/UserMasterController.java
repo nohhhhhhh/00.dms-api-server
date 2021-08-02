@@ -52,8 +52,7 @@ public class UserMasterController {
 
     @PutMapping
     @ApiOperation(value = "User 수정")
-    public ResponseEntity<Response> updateUserMaster(@ModelAttribute UserMasterDto userMasterDto)
-        throws Exception {
+    public ResponseEntity<Response> updateUserMaster(@ModelAttribute UserMasterDto userMasterDto) {
         return userMasterService.updateUserMaster(userMasterDto);
     }
 

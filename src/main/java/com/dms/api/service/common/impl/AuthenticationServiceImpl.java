@@ -77,7 +77,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     resultData.put("userToken", jwt);
-    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+    Response response = new Response(status, message, resultData);
     return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
   }
