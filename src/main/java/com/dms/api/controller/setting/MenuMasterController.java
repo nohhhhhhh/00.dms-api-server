@@ -1,6 +1,7 @@
 package com.dms.api.controller.setting;
 
 import com.dms.api.dto.common.Response;
+import com.dms.api.dto.setting.MenuMasterDto;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.api.service.setting.MenuMasterService;
 import io.swagger.annotations.ApiOperation;
@@ -25,4 +26,11 @@ public class MenuMasterController {
     return menuMasterService.getTopItems(userMasterDto);
   }
 
+  @ApiOperation(value = "top-items", notes = "선택 Menu 의 권한 체크")
+  @GetMapping("/menu-auth")
+  public ResponseEntity<Response> checkMenuAuth(@ModelAttribute UserMasterDto userMasterDto,
+      @ModelAttribute MenuMasterDto menuMasterDto)
+      throws Exception {
+    return menuMasterService.checkMenuAuth(userMasterDto, menuMasterDto);
+  }
 }

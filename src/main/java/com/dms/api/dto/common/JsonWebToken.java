@@ -16,10 +16,14 @@ public class JsonWebToken {
   @JsonInclude(JsonInclude.Include.NON_NULL)
   private String userName;
 
-  public JsonWebToken(String token, String userName) {
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private String userId;
+
+  public JsonWebToken(String token, String userId, String userName) {
     super();
     this.token = token;
     this.userName = userName;
+    this.userId = userId;
   }
 
 }

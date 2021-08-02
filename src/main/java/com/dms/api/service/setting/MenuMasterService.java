@@ -3,6 +3,7 @@ package com.dms.api.service.setting;
 import com.dms.api.dto.common.Response;
 import com.dms.api.dto.setting.MenuMasterDto;
 import com.dms.api.dto.setting.UserMasterDto;
+import com.dms.api.entitiy.setting.MenuMaster;
 import com.dms.api.repository.setting.MenuMasterRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,7 +37,17 @@ public class MenuMasterService {
   public Map<String, Object> resultData;
   public List<?> resultList;
 
+  /**
+   * Top Menu Item Api.
+   *
+   * @author NOH
+   * @since 1.0
+   *
+   */
   public ResponseEntity<Response> getTopItems(UserMasterDto userMasterDto) throws Exception {
+
+    userMasterDto.setUserId("noh");
+    userMasterDto.setPlantId("AS2N");
 
     try {
       status = 200;
@@ -66,6 +77,49 @@ public class MenuMasterService {
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }
 
+  /**
+   * Check Select Menu Auth.
+   *
+   * @author NOH
+   * @since 1.0
+   *
+   */
+  public ResponseEntity<Response> checkMenuAuth(UserMasterDto userMasterDto,
+      MenuMasterDto menuMasterDto) throws Exception {
+
+    userMasterDto.setUserId("noh");
+    userMasterDto.setPlantId("AS2N");
+    userMasterDto.setUseYn("Y");
+
+    try {
+      status = 200;
+      message = "HttpStatus.OK";
+      resultData = new HashMap<String, Object>();
+      List<MenuMaster> selectPartMenuList = new ArrayList<>(); //navi todo
+      HashMap<String, Object> minMaxMap = menuMasterRepository.selectMinMaxLevel(userMasterDto);
+
+      var minMenuLevel = Integer.parseInt(minMaxMap.get("minMenuLevel").toString());
+      var maxMenuLevel = Integer.parseInt(minMaxMap.get("maxMenuLevel").toString());
+      var parentMenuId = "";
+
+      List<MenuMasterDto> menuInfo = menuMasterRepository
+          .selectAuthMenuListByOption(userMasterDto, maxMenuLevel, null, menuMasterDto.getMenuId());
+
+      if (menuInfo.size() > 0) {
+        resultData.put("menuInfo", menuInfo.get(0));
+
+      } else {
+        message = "메뉴의 접근 정보가 유효하지 않습니다. 권한을 추가하여야 합니다.";
+      }
+
+    } catch (Exception e) {
+      message = e.getMessage();
+    }
+
+    Response response = new Response(status, LocalDateTime.now(), message, resultData);
+
+    return new ResponseEntity<Response>(response, HttpStatus.OK);
+  }
 
   private List<MenuMasterDto> getUserAuthMenus(UserMasterDto userMasterDto,
       List<MenuMasterDto> menuList,
@@ -77,7 +131,7 @@ public class MenuMasterService {
     // 1depth
     if (minMenuLevel == searchMenuLevel) {
       menuList = menuMasterRepository
-          .selectAuthMenuListByOption(userMasterDto, searchMenuLevel, parentMenuId);
+          .selectAuthMenuListByOption(userMasterDto, searchMenuLevel, parentMenuId, null);
     }
 
     for (int i = 0; i < menuList.size(); i++) {
@@ -86,7 +140,7 @@ public class MenuMasterService {
       parentMenuId = menuList.get(i).getMenuId();
 
       List<MenuMasterDto> leafMenu = menuMasterRepository
-          .selectAuthMenuListByOption(userMasterDto, menuLevel, parentMenuId);
+          .selectAuthMenuListByOption(userMasterDto, menuLevel, parentMenuId, null);
 
       menuList.get(i).setChildren(leafMenu);
 
