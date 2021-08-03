@@ -1,6 +1,7 @@
 package com.dms.api.service.setting;
 
 import com.dms.api.dto.common.Response;
+import com.dms.api.dto.common.auth.AuthorizedUser;
 import com.dms.api.dto.setting.MenuMasterDto;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.api.entitiy.setting.MenuMaster;
@@ -14,6 +15,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,21 +41,23 @@ public class MenuMasterService {
   public List<?> resultList;
 
   /**
-   * Top Menu Item Api.
+   * Top Menu Item Api of AuthorizedUser.
    *
    * @author NOH
    * @since 1.0
    *
    */
-  public ResponseEntity<Response> getTopItems(UserMasterDto userMasterDto) throws Exception {
-
-    userMasterDto.setUserId("noh");
-    userMasterDto.setPlantId("AS2N");
+  public ResponseEntity<Response> getTopItems(AuthorizedUser authorizedUser, String useYn, String plantId) throws Exception {
 
     try {
       status = 200;
       message = "HttpStatus.OK";
       resultData = new HashMap<String, Object>();
+
+      UserMasterDto userMasterDto = new UserMasterDto();
+      userMasterDto.setUserId(authorizedUser.getUserId());
+      userMasterDto.setUseYn(useYn);
+      userMasterDto.setPlantId(plantId);
 
       HashMap<String, Object> minMaxMap = menuMasterRepository.selectMinMaxLevel(userMasterDto);
 
