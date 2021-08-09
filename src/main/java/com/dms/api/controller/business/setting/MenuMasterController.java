@@ -26,8 +26,7 @@ public class MenuMasterController {
   @GetMapping("/top-items")
   public ResponseEntity<Response> getTopItems(@RequestParam(required = false) String useYn,
       @RequestParam(required = false) String plantId,
-      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser)
-      {
+      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
     return menuMasterService.getTopItems(authorizedUser, useYn, plantId);
   }
 

@@ -20,24 +20,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityUserDetailServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserMasterRepository userMasterRepository;
+  @Autowired
+  UserMasterRepository userMasterRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+  @Override
+  public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
 
-        UserMasterDto userMasterDto = new UserMasterDto();
+    UserMasterDto userMasterDto = new UserMasterDto();
 
-        userMasterDto.setUserId(userId);
-        userMasterDto = userMasterRepository.selectUserOneByOption(userMasterDto)
-            .orElseThrow(() -> new UsernameNotFoundException((userId)));
+    userMasterDto.setUserId(userId);
+    userMasterDto = userMasterRepository.selectUserOneByOption(userMasterDto)
+        .orElseThrow(() -> new UsernameNotFoundException((userId)));
 
-        AuthorizedUser authorizedUser = new AuthorizedUser(null, userMasterDto.getUserId(),
-            userMasterDto.getUserPwd()
-            , userMasterDto.getUserNm(), null
-        );
+    AuthorizedUser authorizedUser = new AuthorizedUser(null, userMasterDto.getUserId(),
+        userMasterDto.getUserPwd()
+        , userMasterDto.getUserNm(), null
+    );
 
-        return new AuthorizedAdapter(authorizedUser);
-    }
+    return new AuthorizedAdapter(authorizedUser);
+  }
 
 }

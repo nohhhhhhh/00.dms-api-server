@@ -40,7 +40,7 @@ public class JwtTokenProvider {
 
   public String createToken(String userId) {
     Claims claims = Jwts.claims().setSubject(userId);
-    claims.put("username",userId);
+    claims.put("username", userId);
     /*claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.*/
     Date expireTime = new Date();
     Long test = 1000 * 60L * 60L * 2L;

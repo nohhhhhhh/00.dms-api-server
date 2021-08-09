@@ -1,6 +1,5 @@
 package com.dms.api.dto.common.auth;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,8 @@ public class AuthorizedUser {
 
   private String plantId;
 
-  public AuthorizedUser(String token, String userId, String userPwd, String userName, String plantId) {
+  public AuthorizedUser(String token, String userId, String userPwd, String userName,
+      String plantId) {
     super();
 
     this.token = token;
