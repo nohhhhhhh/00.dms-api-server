@@ -24,8 +24,7 @@ public class AuthenticationController {
 
   @GetMapping(value = "/open-api/JsonWebToken")
   public ResponseEntity<Response> generateJsonWebToken(
-      @ModelAttribute UserMasterDto userMasterDto)
-      throws Exception {
+      @ModelAttribute UserMasterDto userMasterDto) {
     return authenticationService.generateJsonWebToken(userMasterDto);
   }
 

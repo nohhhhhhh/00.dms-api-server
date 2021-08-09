@@ -6,6 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface AuthenticationService {
 
-  ResponseEntity<Response> generateJsonWebToken(UserMasterDto userMasterDto) throws Exception;
+  ResponseEntity<Response> generateJsonWebToken(UserMasterDto userMasterDto);
 
 }

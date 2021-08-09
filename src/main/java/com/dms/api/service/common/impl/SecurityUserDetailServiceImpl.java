@@ -3,11 +3,8 @@ package com.dms.api.service.common.impl;
 import com.dms.api.dto.common.auth.AuthorizedAdapter;
 import com.dms.api.dto.common.auth.AuthorizedUser;
 import com.dms.api.dto.setting.UserMasterDto;
-import com.dms.api.entitiy.setting.UserMaster;
-import com.dms.api.repository.setting.UserMasterRepository;
-import java.util.ArrayList;
+import com.dms.repository.setting.UserMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,7 +29,7 @@ public class SecurityUserDetailServiceImpl implements UserDetailsService {
         UserMasterDto userMasterDto = new UserMasterDto();
 
         userMasterDto.setUserId(userId);
-        userMasterDto = userMasterRepository.selectOneByOption(userMasterDto)
+        userMasterDto = userMasterRepository.selectUserOneByOption(userMasterDto)
             .orElseThrow(() -> new UsernameNotFoundException((userId)));
 
         AuthorizedUser authorizedUser = new AuthorizedUser(null, userMasterDto.getUserId(),

@@ -15,8 +15,10 @@ public class MenuMasterDto extends CommonDto {
   private String menuNm;
   private String parentMenuId;
   private int menuLevel;
+  private int minMenuLevel;
+  private int maxMenuLevel;
   private String menuUrl;
-  private String seq;
+  private int seq;
   private String linkYn;
   private List<MenuMasterDto> children;
 
