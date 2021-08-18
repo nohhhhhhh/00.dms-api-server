@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,13 +51,6 @@ public class PlantMasterController {
   public ResponseEntity<Response> updateUserMaster(@ModelAttribute PlantMasterDto plantMasterDto,
       @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
     return plantMasterService.updatePlantMaster(plantMasterDto, authorizedUser);
-  }
-
-  @DeleteMapping("/plant-master")
-  @ApiOperation(value = "Plant 삭제")
-  public ResponseEntity<Response> deleteUserMaster(@ModelAttribute PlantMasterDto plantMasterDto,
-      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
-    return plantMasterService.deletePlantMaster(plantMasterDto, authorizedUser);
   }
 
 }
