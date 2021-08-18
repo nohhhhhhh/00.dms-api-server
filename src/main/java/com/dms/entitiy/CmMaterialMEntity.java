@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -21,11 +20,11 @@ public class CmMaterialMEntity {
   private String materialSpec;
   private String materialType;
   private String materialGroup;
-  private BigDecimal seq;
-  private BigDecimal baseQty;
+  private int seq;
+  private int baseQty;
   private String unitCd;
   private String baseLocationId;
-  private BigDecimal expiryDay;
+  private int expiryDay;
   private String ifYn;
   private String ifId;
   private String plantId;
@@ -100,21 +99,21 @@ public class CmMaterialMEntity {
 
   @Basic
   @Column(name = "SEQ")
-  public BigDecimal getSeq() {
+  public int getSeq() {
     return seq;
   }
 
-  public void setSeq(BigDecimal seq) {
+  public void setSeq(int seq) {
     this.seq = seq;
   }
 
   @Basic
   @Column(name = "BASE_QTY")
-  public BigDecimal getBaseQty() {
+  public int getBaseQty() {
     return baseQty;
   }
 
-  public void setBaseQty(BigDecimal baseQty) {
+  public void setBaseQty(int baseQty) {
     this.baseQty = baseQty;
   }
 
@@ -140,11 +139,11 @@ public class CmMaterialMEntity {
 
   @Basic
   @Column(name = "EXPIRY_DAY")
-  public BigDecimal getExpiryDay() {
+  public int getExpiryDay() {
     return expiryDay;
   }
 
-  public void setExpiryDay(BigDecimal expiryDay) {
+  public void setExpiryDay(int expiryDay) {
     this.expiryDay = expiryDay;
   }
 

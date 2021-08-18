@@ -38,35 +38,60 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.21'
-    compile group: 'io.swagger', name: 'swagger-models', version: '1.5.21'
-
-    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
-
-    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-    annotationProcessor "javax.persistence:javax.persistence-api"
-    annotationProcessor "javax.annotation:javax.annotation-api"
-    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
-    compile "com.querydsl:querydsl-jpa:${queryDslVersion}"
-
-    compile group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.2'
-
-
-    compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-    annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.batch:spring-batch-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+
+    /******************************** Api : swagger ********************************/
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.5.21'
+    implementation group: 'io.swagger', name: 'swagger-models', version: '1.5.21'
+    /******************************** Api :swagger ********************************/
+
+    /******************************** modelMapper ********************************/
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+    /******************************** modelMapper ********************************/
+
+    /******************************** JPA : queryDsl ********************************/
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor "javax.persistence:javax.persistence-api"
+    annotationProcessor "javax.annotation:javax.annotation-api"
+    annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jpa"
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    /******************************** JPA : queryDsl ********************************/
+
+    /******************************** Security : Jasypt ********************************/
+    implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.2'
+    /******************************** Security : Jasypt ********************************/
+
+    /******************************** Security : JWT ********************************/
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    /******************************** Security : JWT ********************************/
+
+    /******************************** DB : mssql ********************************/
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    /******************************** DB : mssql ********************************/
+
+    /******************************** lombok ********************************/
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    /******************************** lombok ********************************/
+
+
+    /******************************** Cache ********************************/
+    implementation  'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.ehcache:ehcache:3.8.0'
+    implementation 'javax.cache:cache-api:1.0.0'
+    /******************************** Cache ********************************/
+
+
+
 }
 
 def generated='src/main/generated'

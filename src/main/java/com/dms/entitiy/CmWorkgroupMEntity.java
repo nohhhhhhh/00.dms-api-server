@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -18,7 +17,7 @@ public class CmWorkgroupMEntity {
   private String workgroupId;
   private String workgroupNm;
   private String workgroupType;
-  private BigDecimal seq;
+  private int seq;
   private String startTime;
   private String endTime;
   private String plantId;
@@ -64,11 +63,11 @@ public class CmWorkgroupMEntity {
 
   @Basic
   @Column(name = "SEQ")
-  public BigDecimal getSeq() {
+  public int getSeq() {
     return seq;
   }
 
-  public void setSeq(BigDecimal seq) {
+  public void setSeq(int seq) {
     this.seq = seq;
   }
 

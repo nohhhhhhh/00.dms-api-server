@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "CM_LOG_MENU_H", schema = "dbo")
 public class CmLogMenuHEntity {
 
-  private BigDecimal eventSeq;
+  private int eventSeq;
   private String userId;
   private String menuId;
   private Date eventDt;
@@ -29,11 +28,11 @@ public class CmLogMenuHEntity {
 
   @Id
   @Column(name = "EVENT_SEQ")
-  public BigDecimal getEventSeq() {
+  public int getEventSeq() {
     return eventSeq;
   }
 
-  public void setEventSeq(BigDecimal eventSeq) {
+  public void setEventSeq(int eventSeq) {
     this.eventSeq = eventSeq;
   }
 

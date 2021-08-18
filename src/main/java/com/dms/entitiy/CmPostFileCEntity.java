@@ -1,6 +1,6 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
+
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -16,11 +16,11 @@ import javax.persistence.Table;
 public class CmPostFileCEntity {
 
   private int fileId;
-  private BigDecimal noticeId;
+  private int noticeId;
   private String originFileNm;
   private String saveFileNm;
-  private BigDecimal downloadCnt;
-  private BigDecimal fileSize;
+  private int downloadCnt;
+  private int fileSize;
   private String fileExt;
   private String plantId;
   private String description;
@@ -45,11 +45,11 @@ public class CmPostFileCEntity {
 
   @Id
   @Column(name = "NOTICE_ID")
-  public BigDecimal getNoticeId() {
+  public int getNoticeId() {
     return noticeId;
   }
 
-  public void setNoticeId(BigDecimal noticeId) {
+  public void setNoticeId(int noticeId) {
     this.noticeId = noticeId;
   }
 
@@ -75,21 +75,21 @@ public class CmPostFileCEntity {
 
   @Basic
   @Column(name = "DOWNLOAD_CNT")
-  public BigDecimal getDownloadCnt() {
+  public int getDownloadCnt() {
     return downloadCnt;
   }
 
-  public void setDownloadCnt(BigDecimal downloadCnt) {
+  public void setDownloadCnt(int downloadCnt) {
     this.downloadCnt = downloadCnt;
   }
 
   @Basic
   @Column(name = "FILE_SIZE")
-  public BigDecimal getFileSize() {
+  public int getFileSize() {
     return fileSize;
   }
 
-  public void setFileSize(BigDecimal fileSize) {
+  public void setFileSize(int fileSize) {
     this.fileSize = fileSize;
   }
 

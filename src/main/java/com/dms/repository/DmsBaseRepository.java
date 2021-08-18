@@ -1,5 +1,6 @@
 package com.dms.repository;
 
+import com.dms.utils.queryDsl.CommonBooleanExpression;
 import com.querydsl.core.types.EntityPath;
 import com.querydsl.core.types.Expression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -13,7 +14,7 @@ import org.springframework.data.util.ProxyUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public abstract class DmsBaseRepository<E, ID> {
+public abstract class DmsBaseRepository<E, ID> extends CommonBooleanExpression {
 
   @PersistenceContext
   private EntityManager em;
@@ -31,13 +32,22 @@ public abstract class DmsBaseRepository<E, ID> {
   }
 
   @Transactional
-  public E save(E entity) {
+  public E save(E entity) throws NullPointerException {
     if (isNewEntity(entity)) {
       em.persist(entity);
       return entity;
+    } else {
+      throw new NullPointerException("this is Existent Entity");
     }
+  }
 
-    return em.merge(entity);
+  @Transactional
+  public E merge(E entity) throws NullPointerException {
+    if (isNewEntity(entity)) {
+      throw new NullPointerException("this is newEntity");
+    } else {
+      return em.merge(entity);
+    }
   }
 
   @Transactional
@@ -69,4 +79,5 @@ public abstract class DmsBaseRepository<E, ID> {
   private Boolean isNewEntity(E entity) {
     return this.getJpaEntityInformation(entity.getClass()).isNew(entity);
   }
+
 }

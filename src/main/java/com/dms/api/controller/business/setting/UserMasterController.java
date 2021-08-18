@@ -1,6 +1,7 @@
 package com.dms.api.controller.business.setting;
 
 import com.dms.api.dto.common.Response;
+import com.dms.api.dto.common.auth.AuthorizedUser;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.entitiy.CmUserMEntity;
 import com.dms.api.service.business.setting.UserMasterService;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,27 +41,29 @@ public class UserMasterController {
 
   @GetMapping("/guide")
   public ResponseEntity<Response> getUserMasters(@ModelAttribute UserMasterDto userMasterDto,
-      @RequestParam String param) throws Exception {
+      @RequestParam String param) {
     return userMasterService.getUserMasters(userMasterDto);
   }
 
   @PostMapping
   @ApiOperation(value = "User 등록")
-  public ResponseEntity<Response> saveUserMaster(@ModelAttribute UserMasterDto userMasterDto)
-      throws Exception {
-    return userMasterService.saveUserMaster(userMasterDto);
+  public ResponseEntity<Response> saveUserMaster(@ModelAttribute UserMasterDto userMasterDto,
+      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
+    return userMasterService.saveUserMaster(userMasterDto, authorizedUser);
   }
 
   @PutMapping
   @ApiOperation(value = "User 수정")
-  public ResponseEntity<Response> updateUserMaster(@ModelAttribute UserMasterDto userMasterDto) {
-    return userMasterService.updateUserMaster(userMasterDto);
+  public ResponseEntity<Response> updateUserMaster(@ModelAttribute UserMasterDto userMasterDto,
+      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
+    return userMasterService.updateUserMaster(userMasterDto, authorizedUser);
   }
 
   @DeleteMapping
   @ApiOperation(value = "User 삭제")
-  public ResponseEntity<Response> deleteUserMaster(@ModelAttribute UserMasterDto userMasterDto) {
-    return userMasterService.deleteUserMaster(userMasterDto);
+  public ResponseEntity<Response> deleteUserMaster(@ModelAttribute UserMasterDto userMasterDto,
+      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser) {
+    return userMasterService.deleteUserMaster(userMasterDto, authorizedUser);
   }
 
 }

@@ -1,6 +1,6 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
+
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -19,7 +19,7 @@ public class CmNoticeCEntity {
   private String type;
   private String title;
   private String content;
-  private BigDecimal cnt;
+  private int cnt;
   private String plantId;
   private String description;
   private String useYn;
@@ -72,11 +72,11 @@ public class CmNoticeCEntity {
 
   @Basic
   @Column(name = "CNT")
-  public BigDecimal getCnt() {
+  public int getCnt() {
     return cnt;
   }
 
-  public void setCnt(BigDecimal cnt) {
+  public void setCnt(int cnt) {
     this.cnt = cnt;
   }
 

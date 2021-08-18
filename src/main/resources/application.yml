@@ -28,6 +28,9 @@ spring:
         format_sql: true
         show_sql: true
         generate_statistics: true
+  cache:
+    ehcache:
+      config: classpath:/com.dms/config/cache/DmsEhCache.xml
 logging:
   file:
     path: 'd:/nse/log/dms.%d{yyyy-MM-dd}.%i'

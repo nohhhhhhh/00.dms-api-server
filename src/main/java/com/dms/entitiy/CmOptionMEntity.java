@@ -1,6 +1,6 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
+
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -18,7 +18,7 @@ public class CmOptionMEntity {
   private String optionId;
   private String optionNm;
   private String optionVal;
-  private BigDecimal seq;
+  private int seq;
   private String plantId;
   private String description;
   private String useYn;
@@ -61,11 +61,11 @@ public class CmOptionMEntity {
 
   @Basic
   @Column(name = "SEQ")
-  public BigDecimal getSeq() {
+  public int getSeq() {
     return seq;
   }
 
-  public void setSeq(BigDecimal seq) {
+  public void setSeq(int seq) {
     this.seq = seq;
   }
 

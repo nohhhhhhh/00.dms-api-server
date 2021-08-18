@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -21,7 +20,7 @@ public class CmBomMEntity {
   private String productId;
   private String materialId;
   private String parentId;
-  private BigDecimal qty;
+  private int qty;
   private String unitCd;
   private String plantId;
   private String description;
@@ -95,11 +94,11 @@ public class CmBomMEntity {
 
   @Basic
   @Column(name = "QTY")
-  public BigDecimal getQty() {
+  public int getQty() {
     return qty;
   }
 
-  public void setQty(BigDecimal qty) {
+  public void setQty(int qty) {
     this.qty = qty;
   }
 

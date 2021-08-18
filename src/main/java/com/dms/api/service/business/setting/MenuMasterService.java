@@ -6,6 +6,7 @@ import com.dms.api.dto.setting.MenuMasterDto;
 import com.dms.api.dto.setting.UserMasterDto;
 import com.dms.entitiy.CmMenuMEntity;
 import com.dms.repository.setting.MenuMasterRepository;
+import com.dms.repository.setting.PlantMasterRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +33,8 @@ public class MenuMasterService {
   @Autowired
   private MenuMasterRepository menuMasterRepository;
 
-  public int status = 500;
-  public String message;
-  public Map<String, Object> resultData;
-  public List<?> resultList;
+  @Autowired
+  private PlantMasterRepository plantMasterRepository;
 
   /**
    * Top Menu Item Api of AuthorizedUser.
@@ -47,7 +46,7 @@ public class MenuMasterService {
   public ResponseEntity<Response> getTopItems(AuthorizedUser authorizedUser, String useYn,
       String plantId) {
 
-    resultData = new HashMap<String, Object>();
+    Map<String, Object> resultData = new HashMap<String, Object>();
 
     UserMasterDto userMasterDto = new UserMasterDto();
     userMasterDto.setUserId(authorizedUser.getUserId());
@@ -61,7 +60,6 @@ public class MenuMasterService {
     var parentMenuId = "";
 
     List<MenuMasterDto> menuList = new ArrayList<>();
-
     menuList = getUserAuthMenus(userMasterDto, menuList, minMenuLevel, maxMenuLevel, minMenuLevel,
         parentMenuId);
 
@@ -79,39 +77,32 @@ public class MenuMasterService {
    * @since 1.0
    *
    */
-  public ResponseEntity<Response> checkMenuAuth(UserMasterDto userMasterDto,
-      MenuMasterDto menuMasterDto) throws Exception {
+  public ResponseEntity<Response> checkMenuAuth(AuthorizedUser authorizedUser,
+      UserMasterDto userMasterDto,
+      MenuMasterDto menuMasterDto) {
 
-    userMasterDto.setUserId("noh");
-    userMasterDto.setPlantId("AS2N");
+    userMasterDto.setUserId(authorizedUser.getUserId());
+    userMasterDto.setPlantId(userMasterDto.getPlantId());
     userMasterDto.setUseYn("Y");
 
-    try {
-      status = 200;
-      message = "HttpStatus.OK";
-      resultData = new HashMap<String, Object>();
-      List<CmMenuMEntity> selectPartMenuList = new ArrayList<>(); //navi todo
-      var maxMenuLevel = menuMasterRepository.selectMinMaxLevel(userMasterDto).get()
-          .getMaxMenuLevel();
+    Map<String, Object> resultData = new HashMap<String, Object>();
+    List<CmMenuMEntity> selectPartMenuList = new ArrayList<>(); //navi todo
 
-      var parentMenuId = "";
+    var maxMenuLevel = menuMasterRepository.selectMinMaxLevel(userMasterDto).get()
+        .getMaxMenuLevel();
 
-      List<MenuMasterDto> menuInfo = menuMasterRepository
-          .selectAuthMenuListByOption(userMasterDto, maxMenuLevel, null, menuMasterDto.getMenuId());
+    List<MenuMasterDto> menuInfo = menuMasterRepository
+        .selectAuthMenuListByOption(userMasterDto, maxMenuLevel, null, menuMasterDto.getMenuId());
 
-      if (menuInfo.size() > 0) {
-        resultData.put("menuInfo", menuInfo.get(0));
-
-      } else {
-        message = "메뉴의 접근 정보가 유효하지 않습니다. 권한을 추가하여야 합니다.";
-      }
-
-    } catch (Exception e) {
-      message = e.getMessage();
+    if (menuInfo.size() > 0) {
+      resultData.put("menuInfo", menuInfo.get(0));
+    } else {
+      throw new NullPointerException("메뉴의 접근 정보가 유효하지 않습니다. 권한을 추가하여야 합니다.");
     }
 
-    Response response = new Response(status, message, resultData);
+    resultData.put("userPlantList", plantMasterRepository.selectGetUserPlantList(userMasterDto));
 
+    Response response = new Response(resultData);
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }
 

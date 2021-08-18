@@ -1,7 +1,7 @@
 package com.dms.entitiy;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class CmPostFileCEntityPK implements Serializable {
 
   private int fileId;
-  private BigDecimal noticeId;
+  private int noticeId;
   private String plantId;
 
   @Column(name = "FILE_ID")
@@ -24,11 +24,11 @@ public class CmPostFileCEntityPK implements Serializable {
 
   @Column(name = "NOTICE_ID")
   @Id
-  public BigDecimal getNoticeId() {
+  public int getNoticeId() {
     return noticeId;
   }
 
-  public void setNoticeId(BigDecimal noticeId) {
+  public void setNoticeId(int noticeId) {
     this.noticeId = noticeId;
   }
 

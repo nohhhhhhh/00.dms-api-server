@@ -33,8 +33,10 @@ public class MenuMasterController {
   @ApiOperation(value = "top-items", notes = "선택 Menu 의 권한 체크")
   @GetMapping("/menu-auth")
   public ResponseEntity<Response> checkMenuAuth(@ModelAttribute UserMasterDto userMasterDto,
-      @ModelAttribute MenuMasterDto menuMasterDto)
-      throws Exception {
-    return menuMasterService.checkMenuAuth(userMasterDto, menuMasterDto);
+      @ModelAttribute MenuMasterDto menuMasterDto,
+      @AuthenticationPrincipal(expression = "authorizedUser") AuthorizedUser authorizedUser
+  ) {
+    return menuMasterService.checkMenuAuth(authorizedUser, userMasterDto, menuMasterDto);
   }
+
 }

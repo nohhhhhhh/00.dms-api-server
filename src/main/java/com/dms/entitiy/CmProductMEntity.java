@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -21,8 +20,8 @@ public class CmProductMEntity {
   private String productSpec;
   private String productType;
   private String productGroup;
-  private BigDecimal seq;
-  private BigDecimal baseQty;
+  private int seq;
+  private int baseQty;
   private String unitCd;
   private String routeId;
   private String baseLocationId;
@@ -101,21 +100,21 @@ public class CmProductMEntity {
 
   @Basic
   @Column(name = "SEQ")
-  public BigDecimal getSeq() {
+  public int getSeq() {
     return seq;
   }
 
-  public void setSeq(BigDecimal seq) {
+  public void setSeq(int seq) {
     this.seq = seq;
   }
 
   @Basic
   @Column(name = "BASE_QTY")
-  public BigDecimal getBaseQty() {
+  public int getBaseQty() {
     return baseQty;
   }
 
-  public void setBaseQty(BigDecimal baseQty) {
+  public void setBaseQty(int baseQty) {
     this.baseQty = baseQty;
   }
 

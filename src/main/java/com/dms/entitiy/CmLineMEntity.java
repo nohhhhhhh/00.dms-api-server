@@ -1,6 +1,5 @@
 package com.dms.entitiy;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -18,7 +17,7 @@ public class CmLineMEntity {
   private String lineId;
   private String lineNm;
   private String parentLineId;
-  private BigDecimal seq;
+  private int seq;
   private String pmsYn;
   private String wgtYn;
   private String ifYn;
@@ -65,11 +64,11 @@ public class CmLineMEntity {
 
   @Basic
   @Column(name = "SEQ")
-  public BigDecimal getSeq() {
+  public int getSeq() {
     return seq;
   }
 
-  public void setSeq(BigDecimal seq) {
+  public void setSeq(int seq) {
     this.seq = seq;
   }
 

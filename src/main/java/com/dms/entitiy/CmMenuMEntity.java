@@ -17,9 +17,9 @@ public class CmMenuMEntity {
   private String menuId;
   private String menuNm;
   private String parentMenuId;
-  private int menuLevel;
+  private Integer menuLevel;
   private String menuUrl;
-  private int seq;
+  private Integer seq;
   private String linkYn;
   private String plantId;
   private String description;

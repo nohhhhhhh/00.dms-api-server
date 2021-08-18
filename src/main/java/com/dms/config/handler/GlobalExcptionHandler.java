@@ -2,6 +2,7 @@ package com.dms.config.handler;
 
 import com.dms.api.dto.common.Response;
 import java.nio.file.AccessDeniedException;
+import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,15 @@ public class GlobalExcptionHandler {
 
   @ExceptionHandler({AccessDeniedException.class})
   public ResponseEntity<Object> handleAccessDeniedException(final AccessDeniedException ex) {
+    logger.warn("error", ex);
+    Response response = new Response(HttpStatus.NON_AUTHORITATIVE_INFORMATION.value(),
+        ex.getMessage(), null);
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+  }
+
+
+  @ExceptionHandler({SQLException.class})
+  public ResponseEntity<Object> handleSQLException(final SQLException ex) {
     logger.warn("error", ex);
     Response response = new Response(HttpStatus.NON_AUTHORITATIVE_INFORMATION.value(),
         ex.getMessage(), null);
