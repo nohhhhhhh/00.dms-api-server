@@ -12,7 +12,6 @@ public class PlantMasterDto extends CommonDto {
   @NonNull
   private String plantId;
   private String plantNm;
-  private String seq;
   private String ifYn;
   private String siteId;
 

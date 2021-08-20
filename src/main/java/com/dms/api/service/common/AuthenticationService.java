@@ -52,7 +52,7 @@ public class AuthenticationService {
     }
 
     resultData.put("userToken", jwt);
-    Response response = new Response(status, message, resultData);
+    Response response = new Response(resultData);
 
     return new ResponseEntity<Response>(response, HttpStatus.OK);
   }

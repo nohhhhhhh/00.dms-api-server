@@ -33,8 +33,7 @@ public class SecurityUserDetailServiceImpl implements UserDetailsService {
         .orElseThrow(() -> new UsernameNotFoundException((userId)));
 
     AuthorizedUser authorizedUser = new AuthorizedUser(null, userMasterDto.getUserId(),
-        userMasterDto.getUserPwd()
-        , userMasterDto.getUserNm(), null
+        userMasterDto.getUserPwd(), userMasterDto.getUserNm(), null
     );
 
     return new AuthorizedAdapter(authorizedUser);

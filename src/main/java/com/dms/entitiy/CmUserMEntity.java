@@ -1,6 +1,6 @@
 package com.dms.entitiy;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,16 +17,16 @@ public class CmUserMEntity {
   private String userNm;
   private String userState;
   private String userPwd;
-  private Date changePwdDt;
+  private Timestamp changePwdDt;
   private String email;
   private String telephone;
   private String mobile;
   private String mainMenuId;
   private String description;
   private String useYn;
-  private Date createDt;
+  private Timestamp createDt;
   private String createUserId;
-  private Date updateDt;
+  private Timestamp updateDt;
   private String updateUserId;
   private String api;
   private String tid;
@@ -73,11 +73,11 @@ public class CmUserMEntity {
 
   @Basic
   @Column(name = "CHANGE_PWD_DT")
-  public Date getChangePwdDt() {
+  public Timestamp getChangePwdDt() {
     return changePwdDt;
   }
 
-  public void setChangePwdDt(Date changePwdDt) {
+  public void setChangePwdDt(Timestamp changePwdDt) {
     this.changePwdDt = changePwdDt;
   }
 
@@ -144,11 +144,11 @@ public class CmUserMEntity {
   @Basic
   @CreationTimestamp
   @Column(name = "CREATE_DT", insertable = true, updatable = false)
-  public Date getCreateDt() {
+  public Timestamp getCreateDt() {
     return createDt;
   }
 
-  public void setCreateDt(Date createDt) {
+  public void setCreateDt(Timestamp createDt) {
     this.createDt = createDt;
   }
 
@@ -163,17 +163,18 @@ public class CmUserMEntity {
   }
 
   @Basic
+  @CreationTimestamp
   @Column(name = "UPDATE_DT", insertable = false, updatable = true)
-  public Date getUpdateDt() {
+  public Timestamp getUpdateDt() {
     return updateDt;
   }
 
-  public void setUpdateDt(Date updateDt) {
+  public void setUpdateDt(Timestamp updateDt) {
     this.updateDt = updateDt;
   }
 
   @Basic
-  @Column(name = "UPDATE_USER_ID")
+  @Column(name = "UPDATE_USER_ID", insertable = false, updatable = true)
   public String getUpdateUserId() {
     return updateUserId;
   }

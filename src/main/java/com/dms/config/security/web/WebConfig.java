@@ -9,6 +9,11 @@ public class WebConfig implements WebMvcConfigurer {
 
   private final long MAX_AGE_SEC = 3600;
 
+/*
+  @Autowired
+  DmsHandlerMethodArgumentResolver dmsHandlerMethodArgumentResolver;
+*/
+
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
@@ -18,4 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
         .allowCredentials(false)
         .maxAge(MAX_AGE_SEC);
   }
+  /*@Override
+  public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+    argumentResolvers.add(dmsHandlerMethodArgumentResolver);
+  }*/
+
 }

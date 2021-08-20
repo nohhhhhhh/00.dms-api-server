@@ -1,6 +1,6 @@
 package com.dms.entitiy;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "CM_ACCESS_M", schema = "dbo")
@@ -19,9 +21,9 @@ public class CmAccessMEntity {
   private String plantId;
   private String description;
   private String useYn;
-  private Date createDt;
+  private Timestamp createDt;
   private String createUserId;
-  private Date updateDt;
+  private Timestamp updateDt;
   private String updateUserId;
   private String api;
   private String tid;
@@ -77,17 +79,18 @@ public class CmAccessMEntity {
   }
 
   @Basic
-  @Column(name = "CREATE_DT")
-  public Date getCreateDt() {
+  @CreationTimestamp
+  @Column(name = "CREATE_DT", insertable = true, updatable = false)
+  public Timestamp getCreateDt() {
     return createDt;
   }
 
-  public void setCreateDt(Date createDt) {
+  public void setCreateDt(Timestamp createDt) {
     this.createDt = createDt;
   }
 
   @Basic
-  @Column(name = "CREATE_USER_ID")
+  @Column(name = "CREATE_USER_ID", insertable = true, updatable = false)
   public String getCreateUserId() {
     return createUserId;
   }
@@ -97,17 +100,18 @@ public class CmAccessMEntity {
   }
 
   @Basic
-  @Column(name = "UPDATE_DT")
-  public Date getUpdateDt() {
+  @UpdateTimestamp
+  @Column(name = "UPDATE_DT", insertable = false, updatable = true, columnDefinition = "DATETIME(2)")
+  public Timestamp getUpdateDt() {
     return updateDt;
   }
 
-  public void setUpdateDt(Date updateDt) {
+  public void setUpdateDt(Timestamp updateDt) {
     this.updateDt = updateDt;
   }
 
   @Basic
-  @Column(name = "UPDATE_USER_ID")
+  @Column(name = "UPDATE_USER_ID", insertable = false, updatable = true)
   public String getUpdateUserId() {
     return updateUserId;
   }

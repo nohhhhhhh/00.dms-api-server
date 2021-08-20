@@ -12,6 +12,5 @@ public class SiteMasterDto extends CommonDto {
   @NonNull
   private String siteId;
   private String siteNm;
-  private int seq;
 
 }

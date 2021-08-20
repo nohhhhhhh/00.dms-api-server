@@ -40,7 +40,8 @@ public class UserMasterRepository extends DmsBaseRepository<CmUserMEntity, Long>
     ).from(cmUserMEntity)
         .where(eqUseYn(userMasterDto.getUseYn()), lkIdOrName(userMasterDto.getIdOrName()),
             eqUserId(userMasterDto.getUserId()))
-        .orderBy(cmUserMEntity.createDt.desc()).fetchOne());
+        .orderBy(cmUserMEntity.createDt.desc())
+        .fetchOne());
   }
 
   /**

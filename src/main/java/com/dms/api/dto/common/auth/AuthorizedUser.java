@@ -28,6 +28,7 @@ public class AuthorizedUser {
     this.userPwd = userPwd;
     this.userName = userName;
     this.plantId = plantId;
+
   }
 
 }

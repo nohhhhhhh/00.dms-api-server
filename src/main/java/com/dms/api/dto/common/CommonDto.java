@@ -1,5 +1,6 @@
 package com.dms.api.dto.common;
 
+import java.text.SimpleDateFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +10,13 @@ public class CommonDto {
 
   private String idOrName;
 
+  private Integer seq;
   private String plantId;
   private String description;
   private String useYn;
-  private java.sql.Timestamp createDt;
+  private SimpleDateFormat createDt;
   private String createUserId;
-  private java.sql.Timestamp updateDt;
+  private SimpleDateFormat updateDt;
   private String updateUserId;
   private String api;
   private String tid;
