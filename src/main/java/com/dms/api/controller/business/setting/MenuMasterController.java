@@ -39,4 +39,6 @@ public class MenuMasterController {
     return menuMasterService.checkMenuAuth(authorizedUser, userMasterDto, menuMasterDto);
   }
 
+
+
 }

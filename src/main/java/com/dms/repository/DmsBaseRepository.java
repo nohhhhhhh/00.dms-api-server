@@ -62,7 +62,6 @@ public abstract class DmsBaseRepository<E, ID> extends CommonBooleanExpression {
     if (existing == null) {
       return;
     }
-
     em.remove(em.contains(entity) ? entity : em.merge(entity));
   }
 
